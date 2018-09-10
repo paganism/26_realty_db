@@ -1,0 +1,146 @@
+[
+  {
+    "model": "core.filter",
+    "pk": 1,
+    "fields": {
+      "created": "2018-08-07T00:00:00.000Z",
+      "updated": "2018-08-07T00:00:00.000Z",
+      "name": "Filter for test_execute_default_action_in_filter",
+      "description": "",
+      "default_action": "pass",
+      "priority": 1
+    }
+  },
+  {
+    "model": "core.relation",
+    "pk": 1,
+    "fields": {
+      "created": "2018-08-07T00:00:00.000Z",
+      "updated": "2018-08-07T00:00:00.000Z",
+      "name": "Relation for test_execute_default_action_in_filter",
+      "description": "",
+      "plugin": "plugins.plugin_merchants"
+    }
+  },
+  {
+    "model": "core.bindinglist",
+    "pk": 1,
+    "fields": {
+      "created": "2018-08-07T00:00:00.000Z",
+      "updated": "2018-08-07T00:00:00.000Z",
+      "filter": 1,
+      "relation": 1,
+      "priority": 0
+    }
+  },
+  {
+    "model": "plugin_merchants.merchantplugincondition",
+    "pk": 1,
+    "fields": {
+      "created": "2018-08-07T00:00:00.000Z",
+      "updated": "2018-08-07T00:00:00.000Z",
+      "condition": null,
+      "relation": 1,
+      "is_deleted": false,
+      "merchant": "TestDefaultActionInFilterMerchant"
+    }
+  },
+
+
+
+  {
+    "model": "core.filter",
+    "pk": 2,
+    "fields": {
+      "created": "2018-08-07T00:00:00.000Z",
+      "updated": "2018-08-07T00:00:00.000Z",
+      "name": "Filter for test_long_worker_job",
+      "description": "",
+      "default_action": "review",
+      "priority": 2
+    }
+  },
+  {
+    "model": "core.relation",
+    "pk": 2,
+    "fields": {
+      "created": "2018-08-07T00:00:00.000Z",
+      "updated": "2018-08-07T00:00:00.000Z",
+      "name": "Relation for test_long_worker_job",
+      "description": "",
+      "plugin": "plugins.plugin_merchants"
+    }
+  },
+  {
+    "model": "core.bindinglist",
+    "pk": 2,
+    "fields": {
+      "created": "2018-08-07T00:00:00.000Z",
+      "updated": "2018-08-07T00:00:00.000Z",
+      "filter": 2,
+      "relation": 2,
+      "priority": 0
+    }
+  },
+  {
+    "model": "plugin_merchants.merchantplugincondition",
+    "pk": 2,
+    "fields": {
+      "created": "2018-08-07T00:00:00.000Z",
+      "updated": "2018-08-07T00:00:00.000Z",
+      "condition": null,
+      "relation": 2,
+      "is_deleted": false,
+      "merchant": "TestLongWorkerJobMerchant"
+    }
+  },
+  {
+    "model": "core.rule",
+    "pk": 1,
+    "fields": {
+      "created": "2018-08-07T00:00:00.000Z",
+      "updated": "2018-08-07T00:00:00.000Z",
+      "name": "Rule for test_long_worker_job",
+      "description": "",
+      "action": "review",
+      "risk_score": 0,
+      "is_locked": false,
+      "is_deleted": false
+    }
+  },
+  {
+    "model": "core.rulelist",
+    "pk": 1,
+    "fields": {
+      "created": "2018-08-07T00:00:00.000Z",
+      "updated": "2018-08-07T00:00:00.000Z",
+      "filter": 2,
+      "rule": 1,
+      "priority": 0
+    }
+  },
+  {
+    "model": "core.condition",
+    "pk": 1,
+    "fields": {
+      "created": "2018-08-07T00:00:00.000Z",
+      "updated": "2018-08-07T00:00:00.000Z",
+      "name": "Condition for test_long_worker_job",
+      "description": "",
+      "plugin": "plugins.plugin_test",
+      "is_locked": false,
+      "is_deleted": false
+    }
+  },
+  {
+    "model": "core.conditionlist",
+    "pk": 1,
+    "fields": {
+      "created": "2018-08-07T00:00:00.000Z",
+      "updated": "2018-08-07T00:00:00.000Z",
+      "condition": 1,
+      "rule": 1,
+      "priority": 0
+    }
+  }
+]

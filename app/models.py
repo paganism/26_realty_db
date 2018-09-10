@@ -15,6 +15,7 @@ class Ads(db.Model):
     construction_year = db.Column(db.Date)
     rooms_number = db.Column(db.Integer)
     premise_area = db.Column(db.Float)
+    is_active = db.Column(db.Boolean, default=True)
 
     # def add_ad(self, settlement,
     #            under_construction,
