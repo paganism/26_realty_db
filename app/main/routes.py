@@ -2,6 +2,13 @@ from flask import Flask, render_template, redirect, flash, url_for, current_app
 from app.models import Ads
 from app import db
 from app.main import bp
+# from apply_data import
+
+
+@bp.before_request
+def before_request():
+    db.session.commit()
+
 
 
 @bp.route('/', methods=['GET', 'POST'])
