@@ -12,7 +12,7 @@ def before_request():
 
 
 @bp.route('/', methods=['GET', 'POST'])
-# @app.route('/index', methods=['GET', 'POST'])
+@bp.route('/index', methods=['GET', 'POST'])
 def ads_list():
     oblast_district = request.args.get('oblast_district')
     new_building = request.args.get('new_building')
@@ -22,19 +22,30 @@ def ads_list():
     if not min_price:
         print('HVG')
     adss = Ads.query.filter_by(oblast_district=oblast_district, construction_year='2010')
-    print(adss)
-    ads = [{
-            "settlement": "Череповец",
-            "under_construction": False,
-            "description": '''Квартира в отличном состоянии. Заезжай и живи!''',
-            "price": 2080000,
-            "oblast_district": "Череповецкий район",
-            "living_area": 17.3,
-            "has_balcony": True,
-            "address": "Юбилейная",
-            "construction_year": 2001,
-            "rooms_number": 2,
-            "premise_area": 43.0,
-        }]*10
-    return render_template('ads_list.html', ads=ads)
+    # print(adss)
+    page = request.args.get('page', 1, type=int)
+    print_ads = Ads.query.order_by(Ads.construction_year.desc())
+    ads = Ads.query.order_by(Ads.construction_year.desc()).paginate(
+        page, current_app.config['ADS_PER_PAGE'], False)
+    print(print_ads)
+    next_url = url_for('main.ads_list', page=ads.next_num) if ads.has_next else None
+    prev_url = url_for('main.ads_list', page=ads.prev_num) if ads.has_prev else None
+
+    # ads = [{
+    #         "settlement": "Череповец",
+    #         "under_construction": False,
+    #         "description": '''Квартира в отличном состоянии. Заезжай и живи!''',
+    #         "price": 2080000,
+    #         "oblast_district": "Череповецкий район",
+    #         "living_area": 17.3,
+    #         "has_balcony": True,
+    #         "address": "Юбилейная",
+    #         "construction_year": 2001,
+    #         "rooms_number": 2,
+    #         "premise_area": 43.0,
+    #     }]*10
+    return render_template('ads_list.html', ads=ads.items,
+                           next_url=next_url,
+                           prev_url=prev_url
+                           )
 
