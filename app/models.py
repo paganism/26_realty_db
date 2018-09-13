@@ -19,38 +19,6 @@ class Ads(db.Model):
 
 
     def __repr__(self):
-        return '<ADs {}>'.format(self.settlement)
+        return '<Ads is {}>'.format(self.settlement)
 
-    @classmethod
-    def update_before_insert(cls, session):
-        session._changes = {
-            'add': list(session.new),
-            'update': list(session.dirty),
-            'delete': list(session.deleted)
-        }
-
-    # def add_ad(self, settlement,
-    #            under_construction,
-    #            description,
-    #            price,
-    #            oblast_district,
-    #            living_area,
-    #            has_balcony,
-    #            address,
-    #            construction_year,
-    #            rooms_number,
-    #            premise_area
-    #            ):
-    #     self.settlement = settlement
-    #     self.under_construction = under_construction
-    #     self.description = description
-    #     self.price = price
-    #     self.oblast_district = oblast_district
-    #     self.living_area = living_area
-    #     self.has_balcony = has_balcony
-    #     self.address = address
-    #     self.construction_year = construction_year
-    #     self.rooms_number = rooms_number
-    #     self.premise_area = premise_area
-    #     db.session.add()
-
+    
