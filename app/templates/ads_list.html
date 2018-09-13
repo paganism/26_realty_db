@@ -38,6 +38,7 @@
               <p>город / районный центр</p>
               <div class="form-group">
                 <select name="oblast_district" class="form-control">
+                  <option selected>{{ oblast_district }}</option>
                   <option value="Череповецкий район">Череповец</option>
                   <option value="Шекснинский район">Шексна</option>
                   <option value="Вологодский район">Вологда</option>
@@ -134,7 +135,7 @@
                         <p><strong>Продается {{ ad.rooms_number }}-комнатная квартира</strong></p>
                       </div>
                       <div class="col-sm-5">
-                        <p class="text-right"><strong class="nowrap">{{ ad.price }} р.</strong></p>
+                        <p class="text-right"><strong class="nowrap">{{ ad.price|float }} р.</strong></p>
                       </div>
                     </div>
                     <div class="row">
@@ -156,26 +157,8 @@
             {% endfor %}
             <div class="panel-body">
               <div class="clearfix">
-                <ul class="pagination pull-right">
-                  <li class="disabled"><span>«</span></li>
-                  <li class="active"><span>1 <span class="sr-only">(current)</span></span></li>
-                  <li><a href="?page=2" role="next">2</a></li>
-                  <li><a href="?page=3" role="next">3</a></li>
-                  <li><a href="?page=4" role="next">4</a></li>
-                  <li><a href="?page=2" role="next">»</a></li>
-                </ul>
-                <ul class="pager">
-                  <li class="previous{% if not prev_url %} disabled{% endif %}">
-                    <a href="{{ prev_url }}">
-                      <span aria-hidden="true">&larr;</span> {{ Newer_messages }}
-                    </a>
-                  </li>
-                  <li class="next{% if not next_url %} disabled{% endif %}">
-                    <a href="{{ next_url }}">
-                      {{ Older_messages }} <span aria-hidden="true">&rarr;</span>
-                    </a>
-                  </li>
-                </ul>
+                {{ pagination.info }}
+                {{ pagination.links }}
               </div>
             </div>
           </div>

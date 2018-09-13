@@ -56,10 +56,6 @@ if __name__ == '__main__':
     args = parse_arguments()
     if not os.path.exists(args.path) or not args.path:
         sys.exit('Некорректно указан аргумент')
-    # filepath = args.path
-    # loaded_json = load_data(filepath)
-    # for i in loaded_json:
-    #     print(i['settlement'])
     with app.app_context():
         try:
             loaded_json = load_data(args.path)
