@@ -18,6 +18,4 @@ class Ads(db.Model):
     is_active = db.Column(db.Boolean, default=True, index=True)
 
 
-    def __repr__(self):
-        return '<Ads is {}>'.format(self.settlement)
 
