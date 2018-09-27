@@ -21,4 +21,3 @@ class Ads(db.Model):
     def __repr__(self):
         return '<Ads is {}>'.format(self.settlement)
 
-    
