@@ -29,7 +29,7 @@ def update_old_ads_before_insert():
     old_ads = Ads.query.filter_by(is_active=True)
     if old_ads:
         for ads in old_ads:
-            ads.is_active=False
+            ads.is_active = False
     db.session.commit()
 
 

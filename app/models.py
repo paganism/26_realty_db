@@ -16,6 +16,3 @@ class Ads(db.Model):
     rooms_number = db.Column(db.Integer)
     premise_area = db.Column(db.Float)
     is_active = db.Column(db.Boolean, default=True, index=True)
-
-
-
