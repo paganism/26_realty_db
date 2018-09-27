@@ -1,5 +1,7 @@
-from app import db
-from flask import current_app
+from flask_sqlalchemy import SQLAlchemy
+
+
+db = SQLAlchemy()
 
 
 class Ads(db.Model):

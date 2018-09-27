@@ -1,8 +1,7 @@
 import argparse
 import json
 import sys
-from app import db
-from app.models import Ads
+from models import Ads, db
 from server import app
 import os
 from sqlalchemy import exc
@@ -35,7 +34,6 @@ def update_old_ads_before_insert():
 
 def insert_data_to_db(loaded_json):
     for ad in loaded_json:
-        print(ad['settlement'])
         ad_to_insert = Ads(settlement=ad['settlement'],
                            under_construction=ad['under_construction'],
                            description=ad['description'],
