@@ -6,6 +6,7 @@ from config import Config
 
 app = Flask(__name__)
 db = SQLAlchemy()
+from app import models
 migrate = Migrate()
 
 
@@ -20,5 +21,3 @@ def create_app(config_class=Config):
 
     return app
 
-
-from app import models
