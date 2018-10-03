@@ -20,26 +20,34 @@ def ads_list():
     page = request.args.get(get_page_parameter(), type=int, default=1)
     oblast_district = request.args.get('oblast_district')
     new_building = request.args.get('new_building', False)
-    min_price = request.args.get('min_price', 0)
-    max_price = request.args.get('max_price')
-    if not min_price:
-        min_price = 0
-    ads_max_price = Ads.query.filter_by(is_active=True).order_by(
-        Ads.price.desc()).first()
+    min_price = request.args.get('min_price', 0, type=int)
+    max_price = request.args.get('max_price', type=int)
+    # ads_max_price = Ads.query.filter_by(is_active=True).order_by(
+    #     Ads.price.desc()).first()
+    ads = Ads.query.filter_by(is_active=True).order_by(Ads.price.desc())
+    ads_max_price = ads.first()
     if not max_price:
         max_price = ads_max_price.price
     current_year = datetime.today().year
     if oblast_district:
-        ads = Ads.query.filter(Ads.is_active,
-                               Ads.oblast_district == oblast_district,
+        ads = ads.filter(
+            Ads.oblast_district == oblast_district,
                                Ads.price >= min_price,
                                Ads.price <= max_price,
-                               )
+            )
+        # ads = Ads.query.filter(Ads.is_active,
+        #                        Ads.oblast_district == oblast_district,
+        #                        Ads.price >= min_price,
+        #                        Ads.price <= max_price,
+        #                        )
     else:
-        ads = Ads.query.filter(Ads.is_active,
-                               Ads.price >= min_price,
+        ads = ads.filter(Ads.price >= min_price,
                                Ads.price <= max_price,
-                               )
+                         )
+        # ads = Ads.query.filter(Ads.is_active,
+        #                        Ads.price >= min_price,
+        #                        Ads.price <= max_price,
+        #                        )
         oblast_district = ''
     if new_building:
         ads = ads.filter(

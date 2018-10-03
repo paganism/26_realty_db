@@ -26,9 +26,15 @@ def parse_arguments():
 
 def update_old_ads_before_insert():
     old_ads = Ads.query.filter_by(is_active=True)
+    print(type(old_ads))
+    mappings = []
     if old_ads:
         for ads in old_ads:
-            ads.is_active = False
+            mappings.append({
+                'is_active': False,
+                'id': ads.id
+            })
+    db.session.bulk_update_mappings(Ads, mappings)
     db.session.commit()
 
 
