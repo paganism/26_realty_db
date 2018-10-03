@@ -22,8 +22,6 @@ def ads_list():
     new_building = request.args.get('new_building', False)
     min_price = request.args.get('min_price', 0, type=int)
     max_price = request.args.get('max_price', type=int)
-    # ads_max_price = Ads.query.filter_by(is_active=True).order_by(
-    #     Ads.price.desc()).first()
     ads = Ads.query.filter_by(is_active=True).order_by(Ads.price.desc())
     ads_max_price = ads.first()
     if not max_price:
@@ -35,19 +33,10 @@ def ads_list():
                                Ads.price >= min_price,
                                Ads.price <= max_price,
             )
-        # ads = Ads.query.filter(Ads.is_active,
-        #                        Ads.oblast_district == oblast_district,
-        #                        Ads.price >= min_price,
-        #                        Ads.price <= max_price,
-        #                        )
     else:
         ads = ads.filter(Ads.price >= min_price,
                                Ads.price <= max_price,
                          )
-        # ads = Ads.query.filter(Ads.is_active,
-        #                        Ads.price >= min_price,
-        #                        Ads.price <= max_price,
-        #                        )
         oblast_district = ''
     if new_building:
         ads = ads.filter(
