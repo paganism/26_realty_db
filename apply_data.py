@@ -26,7 +26,6 @@ def parse_arguments():
 
 def update_old_ads_before_insert():
     old_ads = Ads.query.filter_by(is_active=True)
-    print(type(old_ads))
     mappings = []
     if old_ads:
         for ads in old_ads:
@@ -50,7 +49,8 @@ def insert_data_to_db(loaded_json):
                            address=ad['address'],
                            construction_year=ad['construction_year'],
                            rooms_number=ad['rooms_number'],
-                           premise_area=ad['premise_area']
+                           premise_area=ad['premise_area'],
+                           id=ad['id']
                            )
         db.session.add(ad_to_insert)
         db.session.commit()
