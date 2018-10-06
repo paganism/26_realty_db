@@ -210,12 +210,12 @@
     "id": 21107
   },
   {
-    "settlement": "Череповец",
+    "settlement": "Череповец19644",
     "under_construction": false,
     "description": "",
-    "price": 1780000,
+    "price": 1780001,
     "oblast_district": "Череповецкий район",
-    "living_area": 27.0,
+    "living_area": 27.9,
     "has_balcony": true,
     "address": "Окинина",
     "construction_year": null,
@@ -1330,7 +1330,7 @@
     "id": 31826
   },
   {
-    "settlement": "Вологда111111111",
+    "settlement": "Вологда",
     "under_construction": true,
     "description": "Индивидуальное газовое отопление, подходит под ипотеку с господдержкой.",
     "price": 2400000,
@@ -1342,5 +1342,19 @@
     "rooms_number": 2,
     "premise_area": 52.3,
     "id": 30568
+  },
+  {
+    "settlement": "Вологда",
+    "under_construction": true,
+    "description": "Индивидуальное газовое отопление, подходит под ипотеку с господдержкой.",
+    "price": 2400000,
+    "oblast_district": "Вологодский район",
+    "living_area": 28.73,
+    "has_balcony": true,
+    "address": "Южная роща",
+    "construction_year": 2015,
+    "rooms_number": 2,
+    "premise_area": 52.3,
+    "id": 46720
   }
 ]

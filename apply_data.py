@@ -24,11 +24,15 @@ def parse_arguments():
     return parser.parse_args()
 
 
-def update_old_ads_before_insert():
-    old_ads = Ads.query.filter_by(is_active=True)
+def set_inactive_ads(loaded_json):
+    db_ads = Ads.query.filter_by(is_active=True)
     mappings = []
-    if old_ads:
-        for ads in old_ads:
+    file_id = []
+    for file_ad in loaded_json:
+        file_id.append(file_ad['id'])
+    ads_for_update = db_ads.filter(Ads.id.notin_(file_id))
+    if ads_for_update:
+        for ads in ads_for_update:
             mappings.append({
                 'is_active': False,
                 'id': ads.id
@@ -37,22 +41,39 @@ def update_old_ads_before_insert():
     db.session.commit()
 
 
-def insert_data_to_db(loaded_json):
+def insert_update_db_data(loaded_json):
     for ad in loaded_json:
-        ad_to_insert = Ads(settlement=ad['settlement'],
-                           under_construction=ad['under_construction'],
-                           description=ad['description'],
-                           price=ad['price'],
-                           oblast_district=ad['oblast_district'],
-                           living_area=ad['living_area'],
-                           has_balcony=ad['has_balcony'],
-                           address=ad['address'],
-                           construction_year=ad['construction_year'],
-                           rooms_number=ad['rooms_number'],
-                           premise_area=ad['premise_area'],
-                           id=ad['id']
-                           )
-        db.session.add(ad_to_insert)
+        current_ad = Ads.query.filter_by(id=ad['id']).first()
+        if current_ad and (ad['id'] == current_ad.id):
+            current_ad.settlement = ad['settlement']
+            current_ad.under_construction = ad['under_construction']
+            current_ad.description = ad['description']
+            current_ad.price = ad['price']
+            current_ad.oblast_district = ad['oblast_district']
+            current_ad.living_area = ad['living_area']
+            current_ad.has_balcony = ad['has_balcony']
+            current_ad.address = ad['address']
+            current_ad.construction_year = ad['construction_year']
+            current_ad.rooms_number = ad['rooms_number']
+            current_ad.premise_area = ad['premise_area']
+            current_ad.is_active = True
+        else:
+            print('{} Not In Table. Adding...'.format(ad['id']))
+            ad_to_insert = Ads(
+                settlement=ad['settlement'],
+                under_construction=ad['under_construction'],
+                description=ad['description'],
+                price=ad['price'],
+                oblast_district=ad['oblast_district'],
+                living_area=ad['living_area'],
+                has_balcony=ad['has_balcony'],
+                address=ad['address'],
+                construction_year=ad['construction_year'],
+                rooms_number=ad['rooms_number'],
+                premise_area=ad['premise_area'],
+                id=ad['id']
+                )
+            db.session.add(ad_to_insert)
         db.session.commit()
 
 
@@ -63,7 +84,7 @@ if __name__ == '__main__':
     with app.app_context():
         try:
             loaded_json = load_data(args.path)
-            update_old_ads_before_insert()
-            insert_data_to_db(loaded_json)
+            insert_update_db_data(loaded_json)
+            set_inactive_ads(loaded_json)
         except exc.SQLAlchemyError:
             print('Ошибка при выгрузке данных')
